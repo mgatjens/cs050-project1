@@ -1,0 +1,23 @@
+create table users (
+iduser serial  primary key,
+username varchar not null,
+name varchar not null,
+password varchar not null
+)
+
+create table books (
+idbook serial primary key,
+isbn varchar not null,
+title  varchar not null,
+author varchar not null,
+year smallint
+)
+
+create table reviews (
+idreview serial primary key,
+idbook   integer REFERENCES books not null,
+datereview date not null,
+iduser integer REFERENCES users not null,
+rating   smallint not null,
+opinion  varchar not null
+)

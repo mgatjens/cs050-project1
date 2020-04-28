@@ -1,0 +1,56 @@
+Project
+cs050-project1
+
+set FLASK_APP=application.py
+set FLAK_DEBUG=1
+set DATABASE_URL=postgres://cvhfibqpjtnvjl:fc0839e9101bd2020360ada29fd3cd15982d1bc9a743e0abfeebaac43aa83f9d@ec2-23-20-129-146.compute-1.amazonaws.com:5432/d9hv65evmruos2
+
+flask run
+
+http://127.0.0.1:5000/
+
+_______________________________________________________________________________
+
+API KEY - GOODREADS
+application name = project1
+company name = project1
+key: VistzmuAVfB3oVsjhCvlzA
+secret: zyiBmLTniRrzggVIotrDPdKj6mMxd6DJwlB4ChRPJQ
+
+
+https://www.goodreads.com/book/review_counts.json?key=VistzmuAVfB3oVsjhCvlzA&isbns=0441172717%2C0141439602
+
+https://www.goodreads.com/book/review_counts.json", params={"key": "VistzmuAVfB3oVsjhCvlzA", "isbns": "0441172717"}
+
+http://127.0.0.1:5000/api/0451216725
+
+_______________________________________________________________________________
+
+Database
+
+host 
+ec2-23-20-129-146.compute-1.amazonaws.com
+
+Database
+d9hv65evmruos2
+
+User
+cvhfibqpjtnvjl
+
+Port
+5432
+
+Password
+fc0839e9101bd2020360ada29fd3cd15982d1bc9a743e0abfeebaac43aa83f9d
+
+_______________________________________________________________________________
+URI
+postgres://cvhfibqpjtnvjl:fc0839e9101bd2020360ada29fd3cd15982d1bc9a743e0abfeebaac43aa83f9d@ec2-23-20-129-146.compute-1.amazonaws.com:5432/d9hv65evmruos2
+_______________________________________________________________________________
+
+Heroku CLI
+heroku pg:psql postgresql-rugged-30090 --app cs050-project1
+_______________________________________________________________________________
+
+link BD
+https://adminer.cs50.net/

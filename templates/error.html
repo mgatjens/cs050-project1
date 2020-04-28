@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+    <h2 class="text-danger">Error</h2>
+    <div class="alert alert-danger">
+        <strong>Error ! </strong>{{ message }}
+    </div>
+
+    <div class="alert alert-light">
+        <button class="btn btn-secondary" onclick="goBack()">Go Back</button>        
+        <script>
+            function goBack() {
+            window.history.back();
+            }
+        </script>
+    </div>    
+
+
+{% endblock %}

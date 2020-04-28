@@ -1,0 +1,11 @@
+Flask
+Flask-Session
+Flask-SQLAlchemy
+psycopg2-binary
+SQLAlchemy
+pylint
+pylint-flask
+pylint-flask-sqlalchemy
+requests
+SQLAlchemy
+werkzeug

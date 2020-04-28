@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    bookdetail
+{% endblock %}
+
+{% block body %}
+        <div class="container">
+            <h3>Book Detail</h3>
+            <ul>
+            <form action="{{ url_for('register_review', idbook=book.idbook) }}" method="post">
+                {% macro display_rating(ratingd) -%}
+                    {%- for i in range(ratingd) %}
+                        <span class="fa fa-star checked"></span>    
+                    {%- endfor %}
+                    {%- for i in range(5-ratingd) %}
+                        <span class="fa fa-star"></span>    
+                    {%- endfor %}
+                {%- endmacro %}
+
+                <div class="form-group"> 
+                    <div class="row">
+                        <div class="col-sm-2" style="background-color:#f3f2f5;">
+                            <p>Title: {{ book.title }}</p>
+                            <p>Author: {{ book.author }}</p>
+                            <p>Year: {{ book.year}} </p>
+                            <p>ISBN: {{ book.isbn}} </p>
+                            <p> Rating: 
+                                        {{ display_rating(ratingd=rating) }}       
+                                        {% if rating > 0 %}
+                                            {{ countreviews }} reviews
+                                        {% else %}
+                                            No Reviews.
+                                        {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-sm-3" style="background-color: #fcfcfc;">
+                            <p><h6> Rating from goodreads</h6></p>
+                            <p><img src="{{url_for('static', filename='goodread.jfif', width=50, height=50)}}" ></p>
+                            <p>Average rating: {{ goodreads_rating }} </p>
+                            <p> Number of ratings {{ goodreads_numberratings }}</p>
+                        </div>
+                    </div>
+                    <p></p>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                            Write a review
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <p>
+                                {{ name }} 
+                                <input type="hidden" id="my_rating", name="my_rating", value="1">                                    
+                                <div class="stars" data-rating="1">
+                                    <span class="star">&nbsp;</span>
+                                    <span class="star">&nbsp;</span>
+                                    <span class="star">&nbsp;</span>
+                                    <span class="star">&nbsp;</span>
+                                    <span class="star">&nbsp;</span>
+                                </div>
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        let stars = document.querySelectorAll('.star');
+                                        stars.forEach(function(star){
+                                            star.addEventListener('click', setRating);
+                                        });
+                                        let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
+                                        let target = stars[rating  - 1];
+                                        target.dispatchEvent(new MouseEvent('click'));
+                                    });
+
+                                    function setRating(ev){
+                                        let span = ev.currentTarget;
+                                        let stars = document.querySelectorAll('.star');
+                                        let match = false;
+                                        let num = 0;
+                                        stars.forEach(function(star, index){
+                                            if(match) {
+                                                star.classList.remove('rated');
+                                            }else{
+                                                star.classList.add('rated');                                                    
+                                            }
+                                            if (star === span)  {
+                                                match = true;
+                                                num = index + 1;
+                                            }
+                                            // let starValue=parseInt(star.getAttribute('data-val'));
+                                        })
+                                        document.querySelector('.stars').setAttribute('data-rating', num);
+                                        document.querySelector('input[name="my_rating"]').setAttribute('value', num)
+                                    }
+                                </script>
+
+                                </p>
+                                <label for="review_text">What did you think?</label>
+                                <textarea class="form-control" rows="5" id="review_text" name="review_text" placeholder="Enter your review"></textarea>
+                                <button type="submit" name="btnregisterreview" value="btnregisterreview" class="btn btn-light">Post</button>                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                                            
+
+                <div class="container">
+                    {% if rating > 0 %}
+                        <h6>Reviews</h6>
+                    {% endif %}
+                    <p>
+                        {% for review in bookreviews %}
+                            <p>
+                                <h6>{{ review.name }} </h6>{{ display_rating(ratingd=review.rating) }} {{ review.datereview }}
+                            </p>
+                            <p>{{ review.opinion}} </p>
+                        {% endfor %}
+                    </p>
+                </div>
+            </form>
+            </ul>        
+        </div>          
+{% endblock %}
